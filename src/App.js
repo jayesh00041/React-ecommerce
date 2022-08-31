@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { NavigationBar, Footer, Loader } from './components';
+import { Home, Product, ProductsPage, CartPage } from './pages/';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="container-fluid">
+        <NavigationBar />
+        <main>
+          <Routes>
+            <Route path="/" >
+
+              <Route index element={<Home />} />
+              <Route path="/products/:catagory" element={<ProductsPage />} />
+              <Route path="/product/:p_id" element={<Product />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="*" element={<div className='d-flex justify-content-center'><img src='https://fads.org.in/assets/public/img/404.gif' style={{height:'50vh'}}/></div>} />
+
+            </Route>
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
